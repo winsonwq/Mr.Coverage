@@ -1,0 +1,10 @@
+{
+    "name": "Mr.Coverage", 
+	"version": "0.0.1", 
+	"private": true,
+	"dependencies": {
+		"jasmine-node" : "latest",
+		"wrench" : "latest",
+		"sinon" : "latest"
+	}
+}
