@@ -11,11 +11,13 @@ function jscoverage(sourceDir, destDir, callback) {
 function collectArgs() {
 	var args = process.argv.slice(2),
 		results = [],
-		specFolder;
+		specFolder, projectFolder;
 
 	while (args.length) {
 		var arg = args.shift();
-		if (!/^\-{2}/.test(arg)) {
+		if((/(\-{2}project\-directory)|(-pd)\=.+/i).test(arg)){
+			projectFolder = arg.split('=')[1];
+		}else if (!/^\-{2}/.test(arg)) {
 			specFolder = arg;
 		} else {
 			results.push(arg);
@@ -23,18 +25,22 @@ function collectArgs() {
 	}
 
 	return {
+		projectFolder: projectFolder,
 		specFolder: specFolder || '',
 		results: results
 	};
 }
 
 function help() {
+	var helpStr = ['USAGE: jasmine-coverage --project-directory=(project-directory) (jasmine-node Options below)'
+	].join('\n')
+	console.log(helpStr);
 	require('./coverage');
 }
 
 function runCoverage(consoleArgs) {
-	if(consoleArgs.specFolder === '') return;
-	jscoverage('./', JS_COVERAGE_BASE, function() {
+	if (consoleArgs.specFolder === '' || consoleArgs.projectFolder === '') return;
+	jscoverage(consoleArgs.projectFolder, JS_COVERAGE_BASE, function() {
 		var jasmineArgs = ['coverage', Path.join(JS_COVERAGE_BASE, consoleArgs.specFolder)].concat(consoleArgs.results);
 		var jasmineRun = spawn('node', jasmineArgs);
 
@@ -47,13 +53,14 @@ function runCoverage(consoleArgs) {
 		});
 
 		jasmineRun.on('exit', function() {
-			// console.log('END');
+			console.log('END');
 		});
 	});
 }
 
 function run() {
 	var consoleArgs = collectArgs();
+	console.log(consoleArgs);
 	if (consoleArgs.specFolder === '') {
 		help();
 	} else {
