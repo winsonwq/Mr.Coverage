@@ -4,6 +4,8 @@
 	"private": true,
 	"dependencies": {
 		"jasmine-node" : "latest",
-		"wrench" : "latest"
+		"wrench" : "latest",
+		"colors" : "*",
+		"easy-table" : "*"
 	}
 }
