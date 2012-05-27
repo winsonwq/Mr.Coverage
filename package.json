@@ -6,6 +6,7 @@
 		"jasmine-node" : "latest",
 		"wrench" : "latest",
 		"colors" : "*",
-		"easy-table" : "*"
+		"easy-table" : "*",
+		"Mr.Async": "*"
 	}
 }
