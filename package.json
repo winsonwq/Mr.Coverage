@@ -14,7 +14,7 @@
     "node": "*"
   },
   "bin": {
-    "mr-coverage": "./bin/mr-coverage"
+    "mr-coverage": "./mr-coverage"
   },
   "author": "winsonwq <winsonwq@gmail.com> (http://sheldonw.sinaapp.com)",
   "description": "use jasmine-node to test js coverage",
