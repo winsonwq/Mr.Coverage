@@ -5,7 +5,7 @@ var Path = require('path'),
 	JS_COVERAGE_BASE = '/tmp/jscoverage';
 
 function help() {
-	var helpStr = ['USAGE: jasmine-coverage --project-directory=(project-directory) (jasmine-node Options below)'].join('\n')
+	var helpStr = ['USAGE: mr-coverage --project-directory=(project-directory) (jasmine-node Options below)'].join('\n')
 	console.log(helpStr);
 	require('./lib/coverage');
 }

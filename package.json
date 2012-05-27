@@ -1,12 +1,30 @@
 {
-    "name": "Mr.Coverage", 
-	"version": "0.0.1", 
-	"private": true,
-	"dependencies": {
-		"jasmine-node" : "latest",
-		"wrench" : "latest",
-		"colors" : "*",
-		"easy-table" : "*",
-		"Mr.Async": "*"
-	}
+  "name": "Mr.Coverage",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {
+    "jasmine-node": "latest",
+    "wrench": "latest",
+    "colors": "*",
+    "easy-table": "*",
+    "Mr.Async": "*"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "bin": {
+    "mr-coverage": "./bin/mr-coverage"
+  },
+  "author": "winsonwq <winsonwq@gmail.com> (http://sheldonw.sinaapp.com)",
+  "description": "use jasmine-node to test js coverage",
+  "homepage": "https://github.com/winsonwq/Mr.Coverage",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/winsonwq/Mr.Coverage.git"
+  },
+  "main": "./app.js",
+  "scripts": {
+    "test": "jasmine-node --verbose spec"
+  }
 }
