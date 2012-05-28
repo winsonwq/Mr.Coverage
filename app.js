@@ -24,7 +24,7 @@ function runCoverage(consoleArgs) {
 }
 
 function runJasmineProxy(consoleArgs) {
-	var jasmineArgs = ['./lib/coverage', Path.join(JS_COVERAGE_BASE, consoleArgs.specFolder)].concat(consoleArgs.results);
+	var jasmineArgs = [Path.join(__dirname, './lib/coverage'), Path.join(JS_COVERAGE_BASE, consoleArgs.specFolder)].concat(consoleArgs.results);
 	var jasmineRun = spawn('node', jasmineArgs);
 
 	jasmineRun.stdout.on('data', function(data) {
