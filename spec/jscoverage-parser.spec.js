@@ -40,15 +40,11 @@ describe("jscoverage-parser", function() {
 			expect(json.totalCoverage).toBe(17 / 24);
 			done();
 		});
-	});
-
-	describe("#toString", function() {
-		var consoleStr;
 
 		it("should print table with table template", function(done) {
 			var tableTemplate = require('../lib/template/table-tmpl.js');
 			var parser = new Parser(data);
-			consoleStr = tableTemplate.tmpl(parser.toJSONObject());
+			var consoleStr = tableTemplate.tmpl(parser.toJSONObject());
 
 			var lines = consoleStr.split('\n');
 			expect(lines.length).toBe(5);

@@ -119,4 +119,4 @@ After that, you can run command to get result.
 mr-coverage --pd=/Users/yourname/Desktop/nodeproj spec --verbose
 ```
 Result image:   
-![Example Results](http://farm9.staticflickr.com/8162/7294601970_02b2687115_z.jpg)
+![Example Results](http://farm8.staticflickr.com/7093/7295457200_f09c051acc_z.jpg)
