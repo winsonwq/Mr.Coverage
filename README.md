@@ -112,7 +112,7 @@ describe("script", function() {
 ```
 Here is config in `coverage.json`
 ```
-[ 'script.js' ]
+[ 'script.js' ] 
 ```
 After that, you can run command to get result.
 ```
