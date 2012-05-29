@@ -27,4 +27,5 @@ After three steps above, you can try `mr-coverage` command in your terminal. Goo
 _PS: All installation tests are done in Mac._   
 ## Usage
 For command `mr-coverage`, there is one more param called `--project-directory` or `--pd`. It should be assigned to your testing directory which can support your specs to run. Usually, it will be your project directory.   
+   
 The other arguments are all from `jasmine-node` which is the jasmine runner in nodejs. Especially, `directory` param for `jasmine-node` means your spec folder. Right now, spec folder is always relative to the `--project-directory` folder.
