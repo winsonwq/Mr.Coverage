@@ -1,7 +1,7 @@
 Mr.Coverage
 ===========
 
-node js-coverage using jasmine-node, _alpha 0.0.2_
+node js-coverage using jasmine-node, _**alpha 0.0.2**_
 
 ## Insallation
 You can easily get it installed by following steps
@@ -13,7 +13,7 @@ sudo npm install -g Mr.Coverage
 ```
 `sudo` and  `-g` are necessary because a global executable command `mr-coverage` will be generated in your `/usr/local/bin/` path.
 ### Step3 : Install jscoverage library
-There are two ways to install it. **1**. download and install by yourself from [jscoverage](http://siliconforks.com/jscoverage/download.html). **2**. I prepare a install.sh for you.   
+There are two ways to install it. **1**. download and install by yourself from [jscoverage](http://siliconforks.com/jscoverage/download.html). **2**. I have prepared a install.sh for you.
 ```
 cd /usr/local/lib/node_modules/Mr.Coverage/bin
 ```
