@@ -1,7 +1,7 @@
 Mr.Coverage
 ===========
 
-node js-coverage using jasmine-node, _**alpha 0.0.2**_
+node js-coverage using mocha, _**alpha 0.0.2**_
 
 ## Insallation
 You can easily get it installed by following steps
@@ -28,7 +28,7 @@ _PS: All installation tests are done in Mac._
 ## Usage
 For command `mr-coverage`, there is one more param called `--project-directory` or `--pd`. It should be assigned to your testing directory which can support your specs to run. Usually, it will be your project directory.
 
-The other arguments are all from `jasmine-node` which is the jasmine runner in nodejs. Especially, `directory` param for `jasmine-node` means your spec folder. Right now, spec folder is always relative to the `--project-directory` folder.
+The other arguments are all from `mocha` which is the jasmine runner in nodejs. Especially, `directory` param for `mocha` means your spec folder. Right now, spec folder is always relative to the `--project-directory` folder.
 
 ### Coverage.json
 You must set a `coverage.json` file under the root `--project-directory` folder. The content of that is a array to mark which file or folder Mr.Coverage should track.
@@ -78,37 +78,39 @@ Here is the code in `spec/script.spec.js`, only tested add/minus/multiply/divide
 describe("script", function() {
 
 	var script = require('../script');
+	var should = require('chai').should();
 
 	it("#add", function(done) {
-		expect(script.add(1, 1)).toBe(2);
+        script.add(1, 1).should.equal(2);
 		done();
 	});
 
 	it("#minus", function(done) {
-		expect(script.minus(1, 1)).toBe(0);
+        script.minus(1, 1).should.equal(0);
 		done();
 	});
 
 	it("#multiply", function(done) {
-		expect(script.multiply(1, 1)).toBe(1);
+		script.multiply(1, 1).should.equal(1);
 		done();
 	});
 
 	describe("#divide", function() {
 
 		it("1 / 1", function(done) {
-			expect(script.divide(1, 1)).toBe(1);
+            script.divide(1, 1).should.equal(1);
 			done();
 		});
 
 		it("1 / 0", function(done) {
 			setTimeout(function(argument) {
-				expect(script.divide(1, 0)).toBe(Infinity);
+				script.divide(1, 0).should.equal(Infinity);
 				done();
 			}, 500);
 		});
 	});
 });
+
 ```
 Here is config in `coverage.json`
 ```
@@ -116,7 +118,7 @@ Here is config in `coverage.json`
 ```
 After that, you can run command to get result.
 ```
-mr-coverage --pd=/Users/yourname/Desktop/nodeproj spec --verbose
+mr-coverage --pd=/Users/yourname/Desktop/nodeproj -R spec spec/
 ```
 Result image:   
-![Example Results](http://farm8.staticflickr.com/7093/7295457200_f09c051acc_z.jpg)
+![Example Results]()

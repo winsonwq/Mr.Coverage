@@ -5,13 +5,13 @@ var Path = require('path'),
 	JS_COVERAGE_BASE = '/tmp/jscoverage';
 
 function help() {
-	var helpStr = ['USAGE: mr-coverage --project-directory=(project-directory) (jasmine-node Options below)'].join('\n')
+	var helpStr = ['USAGE: mr-coverage --project-directory=(project-directory) (mocha Options below)'].join('\n')
 	console.log(helpStr);
-	require('./lib/coverage');
+	require('./lib/mocha-coverage');
 }
 
 function runCoverage(consoleArgs) {
-	if (consoleArgs.specFolder === '' || consoleArgs.projectFolder === '') return;
+	if (consoleArgs.specFiles.length === 0 || consoleArgs.projectFolder === '') return;
 	if (Helper.resetDir(JS_COVERAGE_BASE) === false) return;
 
 	Helper.jscoverage(consoleArgs.projectFolder, JS_COVERAGE_BASE, function(err) {
@@ -24,25 +24,28 @@ function runCoverage(consoleArgs) {
 }
 
 function runJasmineProxy(consoleArgs) {
-	var jasmineArgs = [Path.join(__dirname, './lib/coverage'), Path.join(JS_COVERAGE_BASE, consoleArgs.specFolder)].concat(consoleArgs.results);
-	var jasmineRun = spawn('node', jasmineArgs);
+	var files = consoleArgs.specFiles.map(function(filePath){
+		return Path.join(JS_COVERAGE_BASE, filePath);
+	});
+	var spawnArgs = [Path.join(__dirname, './lib/mocha-coverage')].concat(consoleArgs.params).concat(files);
+	var runner = spawn('node', spawnArgs);
 
-	jasmineRun.stdout.on('data', function(data) {
+	runner.stdout.on('data', function(data) {
 		process.stdout.write(data.toString());
 	});
 
-	jasmineRun.stderr.on('data', function(data) {
+	runner.stderr.on('data', function(data) {
 		process.stdout.write(data.toString());
 	});
 
-	jasmineRun.on('exit', function() {
+	runner.on('exit', function() {
 		Helper.resetDir(JS_COVERAGE_BASE);
 	});
 }
 
 function run() {
-	if (consoleArgs.specFolder === '' || consoleArgs.projectFolder === '') {
-		process.argv = [];
+	if (consoleArgs.specFiles.length === 0 || consoleArgs.projectFolder === '') {
+		process.argv = ['node', 'mocha', '--help'];
 		help();
 	} else {
 		runCoverage(consoleArgs);

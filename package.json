@@ -4,6 +4,8 @@
   "private": false,
   "dependencies": {
     "jasmine-node": "latest",
+    "mocha" : "latest",
+    "chai" : "latest",
     "wrench": "latest",
     "colors": "*",
     "easy-table": "*",
