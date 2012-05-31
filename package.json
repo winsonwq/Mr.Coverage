@@ -1,11 +1,11 @@
 {
   "name": "Mr.Coverage",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "private": false,
   "dependencies": {
     "jasmine-node": "latest",
-    "mocha" : "latest",
-    "chai" : "latest",
+    "mocha": "latest",
+    "chai": "latest",
     "wrench": "latest",
     "colors": "*",
     "easy-table": "*",
@@ -20,7 +20,7 @@
     "mr-coverage": "./mr-coverage"
   },
   "author": "winsonwq <winsonwq@gmail.com> (http://sheldonw.sinaapp.com)",
-  "description": "use jasmine-node to test js coverage",
+  "description": "use mocha to test javascript coverage",
   "homepage": "https://github.com/winsonwq/Mr.Coverage",
   "repository": {
     "type": "git",
@@ -28,6 +28,6 @@
   },
   "main": "./app.js",
   "scripts": {
-    "test": "jasmine-node --verbose spec"
+    "test": "mocha -R spec spec/*"
   }
 }
