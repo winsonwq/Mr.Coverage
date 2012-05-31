@@ -26,7 +26,11 @@ After three steps above, you can try `mr-coverage` command in your terminal. Goo
 
 _PS: All installation tests are done in Mac._   
 ## Usage
-For command `mr-coverage`.
+For command `mr-coverage`.   
+```
+USAGE: mr-coverage [project-directory] [spec-directory or spec-files] + (mocha Options below, no need to set file path)
+```
+`+` is important to split additional `mr-coverage` params and original `mocha` params.   
 
 ### Coverage.json
 You must set a `coverage.json` file under the root folder. The content of that is a array to mark which file or folder Mr.Coverage should track.
@@ -116,7 +120,7 @@ Here is config in `coverage.json`
 ```
 After that, you can run command to get result.
 ```
-mr-coverage --pd=/Users/yourname/Desktop/nodeproj -R spec spec/
+mr-coverage /Users/yourname/Desktop/nodeproj spec + -R spec spec/
 ```
 Result image:   
 ![Example Results]()

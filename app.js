@@ -6,7 +6,7 @@ var Path = require('path'),
 	JS_COVERAGE_BASE = '/tmp/jscoverage';
 
 function help() {
-	var helpStr = ['USAGE: mr-coverage [project-directory] [spec-directory or spec-files] (mocha Options below, no need to set file path)'].join('\n')
+	var helpStr = ['USAGE: mr-coverage [project-directory] [spec-directory or spec-files] + (mocha Options below, no need to set file path)'].join('\n')
 	console.log(helpStr);
 	require('./lib/mocha-coverage');
 }
