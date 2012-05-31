@@ -43,7 +43,7 @@ You must set a `coverage.json` file under the root folder. The content of that i
 Right now, coverage.json only support the file and folder format, and it's a white list, that means if you set nothing, coverage report will not show. Btw, the format should not start with `./`. It's always relative to the root folder.
 
 ### Example
-Normally, `mr-coverage` can be used like this. Suppose you have a nodejs project called "nodeproj" in `/User/yourname/Desktop/`, and have a file structures below:
+Normally, `mr-coverage` can be used like this. Suppose you have a nodejs project called "nodeproj" in `~/Desktop/`, and have a file structures below:
 ```
 nodeproj      
  ├─ package.json   
@@ -120,7 +120,7 @@ Here is config in `coverage.json`
 ```
 After that, you can run command to get result.
 ```
-mr-coverage /Users/yourname/Desktop/nodeproj spec + -R spec spec/
+mr-coverage ~/Desktop/nodeproj spec + -R html-cov > ~/Desktop/reports.html
 ```
-Result image:   
-![Example Results]()
+You can open the `reports.html` file to see the result:   
+![Example Results](http://farm8.staticflickr.com/7083/7308886152_d549c93f20_b.jpg)
