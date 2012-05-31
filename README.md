@@ -26,12 +26,10 @@ After three steps above, you can try `mr-coverage` command in your terminal. Goo
 
 _PS: All installation tests are done in Mac._   
 ## Usage
-For command `mr-coverage`, there is one more param called `--project-directory` or `--pd`. It should be assigned to your testing directory which can support your specs to run. Usually, it will be your project directory.
-
-The other arguments are all from `mocha` which is the jasmine runner in nodejs. Especially, `directory` param for `mocha` means your spec folder. Right now, spec folder is always relative to the `--project-directory` folder.
+For command `mr-coverage`.
 
 ### Coverage.json
-You must set a `coverage.json` file under the root `--project-directory` folder. The content of that is a array to mark which file or folder Mr.Coverage should track.
+You must set a `coverage.json` file under the root folder. The content of that is a array to mark which file or folder Mr.Coverage should track.
 ```
 [
   'script.js',
