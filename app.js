@@ -6,6 +6,7 @@ var Path = require('path'),
 	JS_COVERAGE_BASE = '/tmp/jscoverage';
 
 function help() {
+	process.argv = ['node', 'mocha', '--help'];
 	var helpStr = ['USAGE: mr-coverage [project-directory] [spec-directory or spec-files] + (mocha Options below, no need to set file path)'].join('\n')
 	console.log(helpStr);
 	require('./lib/mocha-coverage');
@@ -15,16 +16,31 @@ function hasInvalidParams(){
 	consoleArgs.specFolders.concat(consoleArgs.specFiles).length === 0 || consoleArgs.projectFolder === ''
 }
 
-function foldersToFiles(specFolders){
+function foldersToFiles(specFolders, basePath){
 	var files = [];
 	specFolders.forEach(function(folder){
-		fs.readdirSync(Path.join(JS_COVERAGE_BASE, folder)).forEach(function(filename){
+		fs.readdirSync(Path.join(basePath, folder)).forEach(function(filename){
 			if(Path.extname(filename) === '.js'){
-				files.push(Path.join(JS_COVERAGE_BASE, folder, filename));
+				files.push(Path.join(basePath, folder, filename));
 			}
 		});
 	});
 	return files;
+}
+
+function toAbsPathFiles(relPathFiles, basePath){
+	var files = [];
+	relPathFiles.forEach(function(filename){
+		if(Path.extname(filename) === '.js'){
+			files.push(Path.join(basePath, filename));
+		}
+	});
+	return files;
+}
+
+function getSpecFiles(specFolders, specFiles, basePath){
+	return foldersToFiles(specFolders, basePath)
+		 	.concat(toAbsPathFiles(specFiles, basePath));
 }
 
 function runCoverage(consoleArgs) {
@@ -36,21 +52,21 @@ function runCoverage(consoleArgs) {
 			console.log(err.toString());
 			return;
 		}
-		runJasmineProxy(consoleArgs);
+		runMochaProxy(consoleArgs);
 	});
 }
 
-function runJasmineProxy(consoleArgs) {
-	var files = foldersToFiles(consoleArgs.specFolders).concat(consoleArgs.specFiles);
+function runMochaProxy(consoleArgs) {
+	var files = getSpecFiles(consoleArgs.specFolders, consoleArgs.specFiles, JS_COVERAGE_BASE);
 	var spawnArgs = [Path.join(__dirname, './lib/mocha-coverage')].concat(consoleArgs.params).concat(files);
 	var runner = spawn('node', spawnArgs);
 
 	runner.stdout.on('data', function(data) {
-		process.stdout.write(data.toString());
+		process.stdout.write(data);
 	});
 
 	runner.stderr.on('data', function(data) {
-		process.stdout.write(data.toString());
+		process.stdout.write(data);
 	});
 
 	runner.on('exit', function() {
@@ -58,12 +74,19 @@ function runJasmineProxy(consoleArgs) {
 	});
 }
 
+function runMocha(consoleArgs){
+	var files = getSpecFiles(consoleArgs.specFolders, consoleArgs.specFiles, consoleArgs.projectFolder);
+	process.argv = ['node', 'mocha'].concat(consoleArgs.params.concat(files));
+	require('./lib/mocha-coverage');
+}
+
 function run() {
 	if (hasInvalidParams()) {
-		process.argv = ['node', 'mocha', '--help'];
 		help();
-	} else {
+	} else if(consoleArgs.isCoverageReport){
 		runCoverage(consoleArgs);
+	} else {
+		runMocha(consoleArgs);
 	}
 }
 
