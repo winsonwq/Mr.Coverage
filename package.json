@@ -5,6 +5,7 @@
   "dependencies": {
     "jasmine-node": "latest",
     "mocha": "latest",
+    "sinon": "latest",
     "chai": "latest",
     "wrench": "latest",
     "colors": "*",
