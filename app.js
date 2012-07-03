@@ -1,7 +1,8 @@
 var Path = require('path'),
 	fs = require('fs'),
 	spawn = require('child_process').spawn,
-	consoleArgs = require('./lib/args').getParams(process.argv.slice(2)),
+	args = require('./lib/args'),
+	consoleArgs = args.getParams(process.argv.slice(2)),
 	Helper = require('./lib/helper'),
 	JS_COVERAGE_BASE = '/tmp/jscoverage';
 
@@ -12,39 +13,8 @@ function help() {
 	require('./lib/mocha-coverage');
 }
 
-function hasInvalidParams(){
-	consoleArgs.specFolders.concat(consoleArgs.specFiles).length === 0 || consoleArgs.projectFolder === ''
-}
-
-function foldersToFiles(specFolders, basePath){
-	var files = [];
-	specFolders.forEach(function(folder){
-		fs.readdirSync(Path.join(basePath, folder)).forEach(function(filename){
-			if(Path.extname(filename) === '.js'){
-				files.push(Path.join(basePath, folder, filename));
-			}
-		});
-	});
-	return files;
-}
-
-function toAbsPathFiles(relPathFiles, basePath){
-	var files = [];
-	relPathFiles.forEach(function(filename){
-		if(Path.extname(filename) === '.js'){
-			files.push(Path.join(basePath, filename));
-		}
-	});
-	return files;
-}
-
-function getSpecFiles(specFolders, specFiles, basePath){
-	return foldersToFiles(specFolders, basePath)
-		 	.concat(toAbsPathFiles(specFiles, basePath));
-}
-
 function runCoverage(consoleArgs) {
-	if (hasInvalidParams()) return;
+	if (consoleArgs.hasInvalidParams) return;
 	if (Helper.resetDir(JS_COVERAGE_BASE) === false) return;
 
 	Helper.jscoverage(consoleArgs.projectFolder, JS_COVERAGE_BASE, function(err) {
@@ -57,7 +27,7 @@ function runCoverage(consoleArgs) {
 }
 
 function runMochaProxy(consoleArgs) {
-	var files = getSpecFiles(consoleArgs.specFolders, consoleArgs.specFiles, JS_COVERAGE_BASE);
+	var files = consoleArgs.getSpecFiles(JS_COVERAGE_BASE);
 	var spawnArgs = [Path.join(__dirname, './lib/mocha-coverage')].concat(consoleArgs.params).concat(files);
 	var runner = spawn('node', spawnArgs);
 
@@ -75,13 +45,13 @@ function runMochaProxy(consoleArgs) {
 }
 
 function runMocha(consoleArgs){
-	var files = getSpecFiles(consoleArgs.specFolders, consoleArgs.specFiles, consoleArgs.projectFolder);
+	var files = consoleArgs.getSpecFiles(consoleArgs.projectFolder);
 	process.argv = ['node', 'mocha'].concat(consoleArgs.params.concat(files));
 	require('./lib/mocha-coverage');
 }
 
 function run() {
-	if (hasInvalidParams()) {
+	if (consoleArgs.hasInvalidParams) {
 		help();
 	} else if(consoleArgs.isCoverageReport){
 		runCoverage(consoleArgs);
