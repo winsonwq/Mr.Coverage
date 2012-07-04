@@ -76,4 +76,18 @@ describe("args", function() {
 
 	});
 
+	describe("#getSpecFiles", function() {
+		var fs = require('fs');
+
+	  	it("should return js files grouped with the specFiles and the files in specFolders based on a basePath", function(done) {
+	  		var readDirStub = sinon.stub(fs, 'readdirSync').returns(['mock.js', 'c.txt']);
+	  	  	var files = args.getSpecFiles(['spec', 'spec/inner'], ['spec/a.js', 'spec/inner/b.js'], '/Users');
+
+			files.should.eql(['/Users/spec/mock.js', '/Users/spec/inner/mock.js', '/Users/spec/a.js', '/Users/spec/inner/b.js']);
+			readDirStub.restore();
+			done();
+	  	});
+
+	});
+
 });
