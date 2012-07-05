@@ -3,7 +3,6 @@
   "version": "0.2.0",
   "private": false,
   "dependencies": {
-    "jasmine-node": "latest",
     "mocha": "latest",
     "sinon": "latest",
     "chai": "latest",
@@ -29,6 +28,6 @@
   },
   "main": "./app.js",
   "scripts": {
-    "test": "mocha -R spec spec/*"
+    "test": "mocha -R spec spec/* --ignore-leaks"
   }
 }
