@@ -28,7 +28,7 @@ _PS: All installation tests are done in Mac._
 ## Usage
 For command `mr-coverage`.   
 ```
-USAGE: mr-coverage [project-directory] [spec-directory or spec-files] + (mocha Options below, no need to set file path)
+USAGE: mr-coverage [project-directory] [spec-folders/-files] + (mocha Options below, no need to set file path)
 ```
 `+` is important to split additional `mr-coverage` params and original `mocha` params.   
 
@@ -124,3 +124,14 @@ mr-coverage ~/Desktop/nodeproj spec + -R html-cov > ~/Desktop/reports.html
 ```
 You can open the `reports.html` file to see the result:   
 ![Example Results](http://farm8.staticflickr.com/7083/7308886152_d549c93f20_b.jpg)
+
+## Using like Mocha
+Report format like `html-cov` or `json-cov` is used for the testing of JavaScript coverage. Except these two formats, if user uses format like `spec`, `list`, `tap`, `progress` and so on, `mr-coverage` will run using mocha, and because `mr-coverage` supports using spec-folders and spec-files in console arguments, it's more useful than mocha.
+
+### Example
+If we run command with the 'spec' report format.   
+```
+mr-coverage ~/Desktop/nodeproj spec + -R spec
+```
+You can see the result:   
+![Example Results](http://farm9.staticflickr.com/8283/7506714600_6339222cc8_d.jpg)

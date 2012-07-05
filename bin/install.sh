@@ -2,7 +2,7 @@
 
 git clone git://github.com/visionmedia/node-jscoverage.git
 echo ''
-echo 'install jscoverage...'
+echo 'Installing jscoverage'
 cd ./node-jscoverage && ./configure && make && make install
 echo ''
 cd ../../
