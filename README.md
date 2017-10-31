@@ -1,7 +1,7 @@
 Mr.Coverage
 ===========
 
-node js-coverage using [mocha](http://visionmedia.github.com/mocha), _**beta 0.2.0**_
+node js-coverage using [mocha](https://mochajs.org/), _**beta 0.2.0**_
 
 ## Insallation
 You can easily get it installed by following steps
